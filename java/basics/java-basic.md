@@ -1,9 +1,22 @@
+## Table of Contents
+
+1. [Understanding the Difference Between Instance and Class Variables](#understanding-the-difference-between-instance-and-class-variables)  
+   1. [Instance (Per‑object)](#instance-per-object)  
+   2. [Class (Static, Shared)](#class-static-shared)  
+2. [Revisiting the Original Question](#revisiting-the-original-question)  
+   1. [`private final String something;`](#private-final-string-something)  
+   2. [`private static final String something;`](#private-static-final-string-something)  
+3. [Why `var` Is Not Allowed for Fields](#why-var-is-not-allowed-for-fields)  
+4. [Summary Table](#summary-table)  
+
+---
+
 ## Understanding the Difference Between Instance and Class Variables
 
-### Instance (Per-object)
+### Instance (Per‑object)
 
-* An **instance** is a single **object** created from a class.
-* Each object has its **own copy** of instance variables.
+* An **instance** is a single **object** created from a class.  
+* Each object has its **own copy** of instance variables.  
 * Analogy: Each person has their own name and birthdate.
 
 ```java
@@ -18,7 +31,7 @@ public class Person {
         return name;
     }
 }
-```
+````
 
 **Usage:**
 
@@ -34,7 +47,7 @@ System.out.println(b.getName()); // Bob
 
 ### Class (Static, Shared)
 
-* A **class variable** (marked `static`) belongs to the **class itself**, not to any individual object.
+* A **class variable** (`static`) belongs to the **class itself**, not to any individual object.
 * It is shared across **all instances** of that class.
 * Analogy: A common rule or version number that applies to everyone.
 
@@ -54,39 +67,23 @@ public class Person {
 System.out.println(Person.getSpecies()); // Homo sapiens
 ```
 
-Even if you create 10 `Person` objects, there’s still only one copy of `SPECIES`.
-
 ---
 
 ## Revisiting the Original Question
 
-### What’s the difference between:
-
-```java
-private final String something;
-```
-
-and
-
-```java
-private static final String something;
-```
-
----
-
-### `private final String something;` (Instance / Per-object)
+### `private final String something;`
 
 * Each **object** gets its own `something`.
 * It must be initialized once per object (e.g., via constructor).
-* Analogy: A user's email address — unique to each user.
+* Analogy: A user's email address—unique to each user.
 
 ---
 
-### `private static final String something;` (Class-level / Global constant)
+### `private static final String something;`
 
-* There is only **one shared copy**, no matter how many objects exist.
-* It must be set once when the class is loaded.
-* Analogy: The company name — same across all users.
+* Only **one shared copy** exists, regardless of how many objects you create.
+* It’s initialized once when the class is loaded.
+* Analogy: The company name—same across all users.
 
 ---
 
@@ -94,15 +91,11 @@ private static final String something;
 
 Java does **not** allow `var` for fields (class-level or instance-level). It can only be used for **local variables inside methods**.
 
-This will not compile:
-
 ```java
+// This will not compile:
 private final var name = "Alice"; // Invalid
-```
 
-Instead, use explicit typing:
-
-```java
+// Instead, use explicit typing:
 private final String name = "Alice"; // Valid
 ```
 
@@ -112,6 +105,7 @@ private final String name = "Alice"; // Valid
 
 | Concept        | Keyword                | Scope        | Shared? | Analogy                     |
 | -------------- | ---------------------- | ------------ | ------- | --------------------------- |
-| Instance Field | `private final`        | Per-object   | No      | A user's email address      |
-| Class Field    | `private static final` | Class-wide   | Yes     | The company name            |
-| `var`          | Local variables only   | Method-local | No      | Temporary inferred variable |
+| Instance Field | `private final`        | Per‑object   | No      | A user's email address      |
+| Class Field    | `private static final` | Class‑wide   | Yes     | The company name            |
+| `var`          | Local variables only   | Method‑local | No      | Temporary inferred variable |
+
