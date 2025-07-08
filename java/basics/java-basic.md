@@ -2,12 +2,12 @@
 
 1. [Understanding the Difference Between Instance and Class Variables](#understanding-the-difference-between-instance-and-class-variables)  
    1. [Instance (Per‑object)](#instance-per-object)  
-   2. [Class (Static, Shared)](#class-static-shared)  
+   1. [Class (Static, Shared)](#class-static-shared)  
    1. [Revisiting the Original Question](#revisiting-the-original-question)  
-   1. [`private final String something;`](#private-final-string-something)  
-   2. [`private static final String something;`](#private-static-final-string-something)  
-3. [Why `var` Is Not Allowed for Fields](#why-var-is-not-allowed-for-fields)  
-4. [Summary Table](#summary-table)  
+      1. [`private final String something;`](#private-final-string-something)  
+      1. [`private static final String something;`](#private-static-final-string-something)  
+1. [Why `var` Is Not Allowed for Fields](#why-var-is-not-allowed-for-fields)  
+1. [Summary Table](#summary-table)  
 
 ---
 
@@ -71,7 +71,7 @@ System.out.println(Person.getSpecies()); // Homo sapiens
 
 ### Revisiting the Original Question
 
-### `private final String something;`
+#### `private final String something;`
 
 * Each **object** gets its own `something`.
 * It must be initialized once per object (e.g., via constructor).
@@ -79,7 +79,7 @@ System.out.println(Person.getSpecies()); // Homo sapiens
 
 ---
 
-### `private static final String something;`
+#### `private static final String something;`
 
 * Only **one shared copy** exists, regardless of how many objects you create.
 * It’s initialized once when the class is loaded.
