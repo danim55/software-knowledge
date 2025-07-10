@@ -1,12 +1,12 @@
 ## Table of Contents
 
-1. [ `/etc/fstab` – the filesystem table](#etcfstab--the-filesystem-table)  
+1. [ `/etc/fstab` - the filesystem table](#etcfstab--the-filesystem-table)  
    1. [What it is](#what-it-is)  
    1. [Why it matters](#why-it-matters)  
-1. [Mounting – attaching a filesystem](#mounting--attaching-a-filesystem)  
+1. [Mounting - attaching a filesystem](#mounting--attaching-a-filesystem)  
    1. [What it means](#what-it-means)  
    1. [The mount point](#the-mount-point)  
-1. [NFS – Network File System](#nfs--network-file-system)  
+1. [NFS - Network File System](#nfs--network-file-system)  
    1. [What NFS is](#what-nfs-is)  
    1. [How it works under the hood](#how-it-works-under-the-hood)  
 1. [Putting it all together](#putting-it-all-together)  
@@ -18,7 +18,7 @@
 
 ---
 
-## `/etc/fstab` – the filesystem table
+## `/etc/fstab` - the filesystem table
 
 ### What it is  
 A plain-text file that tells Linux which filesystems to mount at boot (or on demand). Each line has six fields:
@@ -41,7 +41,7 @@ When you run `mount -a` or on each boot, Linux reads `/etc/fstab` and automatica
 The `mount` command tells the kernel to attach a filesystem (local disk, CD, NFS export, etc.) and make it available under a directory in the existing directory tree.
 
 ### The mount point  
-A regular directory (empty, or already a mount point) where the filesystem’s contents appear. Create it with:
+A regular directory (empty, or already a mount point) where the filesystem's contents appear. Create it with:
 
 ```bash
 mkdir -p /path/to/mountpoint
@@ -49,7 +49,7 @@ mkdir -p /path/to/mountpoint
 
 ---
 
-## NFS – Network File System
+## NFS - Network File System
 
 ### What NFS is
 
