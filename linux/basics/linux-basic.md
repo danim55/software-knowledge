@@ -2,19 +2,19 @@
 
 1. [ `/etc/fstab` – the filesystem table](#etcfstab--the-filesystem-table)  
    1. [What it is](#what-it-is)  
-   2. [Why it matters](#why-it-matters)  
-2. [Mounting – attaching a filesystem](#mounting--attaching-a-filesystem)  
+   1. [Why it matters](#why-it-matters)  
+1. [Mounting – attaching a filesystem](#mounting--attaching-a-filesystem)  
    1. [What it means](#what-it-means)  
-   2. [The mount point](#the-mount-point)  
-3. [NFS – Network File System](#nfs--network-file-system)  
+   1. [The mount point](#the-mount-point)  
+1. [NFS – Network File System](#nfs--network-file-system)  
    1. [What NFS is](#what-nfs-is)  
-   2. [How it works under the hood](#how-it-works-under-the-hood)  
-4. [Putting it all together](#putting-it-all-together)  
+   1. [How it works under the hood](#how-it-works-under-the-hood)  
+1. [Putting it all together](#putting-it-all-together)  
    1. [Create the mount directory](#create-the-mount-directory)  
-   2. [Add the share to `/etc/fstab`](#add-the-share-to-etcfstab)  
-   3. [Mount all entries](#mount-all-entries)  
-5. [Why this matters](#why-this-matters)  
-6. [Essence](#essence)  
+   1. [Add the share to `/etc/fstab`](#add-the-share-to-etcfstab)  
+   1. [Mount all entries](#mount-all-entries)  
+1. [Why this matters](#why-this-matters)  
+1. [Essence](#essence)  
 
 ---
 
@@ -24,18 +24,18 @@
 A plain-text file that tells Linux which filesystems to mount at boot (or on demand). Each line has six fields:
 
 1. **Device or remote export** (e.g. `10.11.12.20:/path`)  
-2. **Mount point** (local directory, e.g. `/mnt/nfs_logs`)  
-3. **Filesystem type** (here, `nfs`)  
-4. **Mount options** (comma-separated flags, e.g. `defaults,proto=tcp,port=2049`)  
-5. **Dump** (usually `0`)  
-6. **fsck order** (usually `0` for network filesystems)
+1. **Mount point** (local directory, e.g. `/mnt/nfs_logs`)  
+1. **Filesystem type** (here, `nfs`)  
+1. **Mount options** (comma-separated flags, e.g. `defaults,proto=tcp,port=2049`)  
+1. **Dump** (usually `0`)  
+1. **fsck order** (usually `0` for network filesystems)
 
 ### Why it matters  
 When you run `mount -a` or on each boot, Linux reads `/etc/fstab` and automatically mounts everything it finds there.
 
 ---
 
-## Mounting – attaching a filesystem
+## Mounting - attaching a filesystem
 
 ### What it means  
 The `mount` command tells the kernel to attach a filesystem (local disk, CD, NFS export, etc.) and make it available under a directory in the existing directory tree.
