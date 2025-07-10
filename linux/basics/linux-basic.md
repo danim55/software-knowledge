@@ -58,8 +58,8 @@ A protocol (and set of kernel drivers) that lets one machine share directories o
 ### How it works under the hood
 
 1. **RPC (Remote Procedure Call):** Uses `rpcbind` to negotiate service ports.
-2. **TCP/UDP on port 2049:** File operations—`read`, `write`, `lookup`—happen over TCP or UDP (here forced via `proto=tcp,port=2049`).
-3. **Kernel module:** The Linux NFS client module translates local `open()`, `read()`, `write()` calls into network requests.
+1. **TCP/UDP on port 2049:** File operations—`read`, `write`, `lookup`—happen over TCP or UDP (here forced via `proto=tcp,port=2049`).
+1. **Kernel module:** The Linux NFS client module translates local `open()`, `read()`, `write()` calls into network requests.
 
 ---
 
