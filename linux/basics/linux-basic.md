@@ -1,22 +1,16 @@
 ## Table of Contents
 
-1. [ `/etc/fstab` - the filesystem table](#etcfstab--the-filesystem-table)  
-   1. [What it is](#what-it-is)  
-   1. [Why it matters](#why-it-matters)  
-1. [Mounting - attaching a filesystem](#mounting--attaching-a-filesystem)  
-   1. [What it means](#what-it-means)  
-   1. [The mount point](#the-mount-point)  
-1. [NFS - Network File System](#nfs--network-file-system)  
-   1. [What NFS is](#what-nfs-is)  
-   1. [How it works under the hood](#how-it-works-under-the-hood)  
-1. [Putting it all together](#putting-it-all-together)  
-   1. [Create the mount directory](#create-the-mount-directory)  
-   1. [Add the share to `/etc/fstab`](#add-the-share-to-etcfstab)  
-   1. [Mount all entries](#mount-all-entries)  
-1. [Why this matters](#why-this-matters)  
-1. [Essence](#essence)  
+1. [Configuring Nfs](#configuring-nfs)
+   1. [ `/etc/fstab` - the filesystem table](#etcfstab--the-filesystem-table)  
+   1. [Mounting - attaching a filesystem](#mounting--attaching-a-filesystem)  
+   1. [NFS - Network File System](#nfs--network-file-system)  
+   1. [Example of use](#example-of-use)  
+      1. [Why this matters](#why-this-matters)  
+      1. [Essence](#essence)  
 
 ---
+
+# Configuring NFS
 
 ## `/etc/fstab` - the filesystem table
 
@@ -45,7 +39,7 @@ A regular directory (empty, or already a mount point) where the filesystem's con
 
 ```bash
 mkdir -p /path/to/mountpoint
-````
+```
 
 ---
 
@@ -63,7 +57,7 @@ A protocol (and set of kernel drivers) that lets one machine share directories o
 
 ---
 
-## Putting it all together
+## Example of use
 
 ### Create the mount directory
 
@@ -87,16 +81,16 @@ After this, `/mnt/nfs_logs` behaves like a local folder—its contents are serve
 
 ---
 
-## Why this matters
+   ### Why this matters
 
-* **Automation & consistency:** New VMs automatically mount the same log share.
-* **Performance & reliability:** Matching `defaults,proto=tcp,port=2049` ensures consistent transport.
-* **Seamless tooling:** Standard Linux commands (`ls`, `cp`, `tar`, etc.) work transparently on remote files.
+   * **Automation & consistency:** New VMs automatically mount the same log share.
+   * **Performance & reliability:** Matching `defaults,proto=tcp,port=2049` ensures consistent transport.
+   * **Seamless tooling:** Standard Linux commands (`ls`, `cp`, `tar`, etc.) work transparently on remote files.
 
----
+   ---
 
-## Essence
+   ### Essence
 
-* **`fstab`** declares what to mount where.
-* **`mount`** performs the action.
-* **NFS** provides a networked filesystem interface for remote directories.
+   * **`fstab`** declares what to mount where.
+   * **`mount`** performs the action.
+   * **NFS** provides a networked filesystem interface for remote directories.
