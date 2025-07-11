@@ -4,8 +4,6 @@
     1. [Key Concepts](#key-concepts)
         1. [Common Related Annotations](#common-related-annotations)
         1. [Example](#example)
-        1. [Notes](#notes)
-        1. [When to Use](#when-to-use)
 
 # `@Component` in Spring Boot
 
