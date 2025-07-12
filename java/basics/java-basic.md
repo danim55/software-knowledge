@@ -36,7 +36,7 @@ public class Person {
         return name;
     }
 }
-````
+```
 
 **Usage:**
 
@@ -209,8 +209,6 @@ Java has no `unsigned int` primitive, but provides utility methods:
 * Use unsigned APIs (`parseUnsignedInt`, `toUnsignedLong`, etc.) for unsigned interpretation and operations.
 * Allow failures on invalid data to surface early via `NumberFormatException`.
 
----
 
-Keep this cheat sheet handy when working with binary formats, hexadecimal parsing, or any 32‑/64‑bit data models in Java.
 
 
