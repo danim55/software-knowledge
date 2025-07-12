@@ -132,7 +132,7 @@ There are two core reasons:
 
 ---
 
-### 1. int — Signed 32 bit
+### 1. int  Signed 32 bit
 
 - **Storage:** 32 bits (two’s‑complement)  
 - **Range:** –2³¹ to 2³¹–1 (–2,147,483,648 to 2,147,483,647)  
@@ -185,7 +185,7 @@ Java has no `unsigned int` primitive, but provides utility methods:
 
 ---
 
-### 4. long — Signed 64 bit
+### 4. long  Signed 64 bit
 
 * **Storage:** 64 bits (two’s‑complement)
 * **Range:** –2⁶³ to 2⁶³–1
