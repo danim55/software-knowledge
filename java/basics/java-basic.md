@@ -7,11 +7,12 @@
 1. [Why `var` Is Not Allowed for Fields](#why-var-is-not-allowed-for-fields)  
 1. [Summary Table](#summary-table)  
 
-1. [int — Signed 32‑bit](#int--signed-32‑bit)  
-1. [Unsigned 32‑bit Integers in Java](#unsigned-32‑bit-integers-in-java)  
-1. [Integer.decode(...)](#integerdecode)  
-1. [long — Signed 64‑bit](#long--signed-64‑bit)  
-1. [Quick Tips & Best Practices](#quick-tips--best-practices)  
+1. [Representing numbers in java](#)
+   1. [int — Signed 32‑bit](#int--signed-32‑bit)  
+   1. [Unsigned 32‑bit Integers in Java](#unsigned-32‑bit-integers-in-java)  
+   1. [Integer.decode(...)](#integerdecode)  
+   1. [long — Signed 64‑bit](#long--signed-64‑bit)  
+   1. [Quick Tips & Best Practices](#quick-tips--best-practices)  
 
 ---
 
@@ -126,16 +127,19 @@ There are two core reasons:
 | Class Field    | `private static final` | Class‑wide   | Yes     | The company name            |
 | `var`          | Local variables only   | Method‑local | No      | Temporary inferred variable |
 
+
+## Representing numbers in java
+
 ---
 
-## 1. int — Signed 32‑bit
+### 1. int — Signed 32‑bit
 
 - **Storage:** 32 bits (two’s‑complement)  
 - **Range:** –2³¹ to 2³¹–1 (–2,147,483,648 to 2,147,483,647)  
 - **Parsing:**
   ```java
   int value = Integer.parseInt("7FFFFFFF", 16); // Max positive
-````
+   ```
 
 Throws `NumberFormatException` if:
 
@@ -144,7 +148,7 @@ Throws `NumberFormatException` if:
 
 ---
 
-## 2. Unsigned 32‑bit Integers in Java
+### 2. Unsigned 32‑bit Integers in Java
 
 Java has no `unsigned int` primitive, but provides utility methods:
 
@@ -169,7 +173,7 @@ Java has no `unsigned int` primitive, but provides utility methods:
 
 ---
 
-## 3. Integer.decode(...)
+### 3. Integer.decode(...)
 
 * Supports multiple bases:
 
@@ -181,7 +185,7 @@ Java has no `unsigned int` primitive, but provides utility methods:
 
 ---
 
-## 4. long — Signed 64‑bit
+### 4. long — Signed 64‑bit
 
 * **Storage:** 64 bits (two’s‑complement)
 * **Range:** –2⁶³ to 2⁶³–1
@@ -198,7 +202,7 @@ Java has no `unsigned int` primitive, but provides utility methods:
 
 ---
 
-## 5. Quick Tips & Best Practices
+### 5. Quick Tips & Best Practices
 
 * Strip prefixes (`0x`, `0X`, leading zeros) before `parseInt()` if not using `decode()`.
 * Use the smallest type that fits your value range.
