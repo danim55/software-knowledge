@@ -7,7 +7,7 @@
 1. [Why `var` Is Not Allowed for Fields](#why-var-is-not-allowed-for-fields)  
 1. [Summary Table](#summary-table)  
 
-1. [Representing numbers in java](#)
+1. [Representing numbers in java](#representing-numbers-in-java)
    1. [int — Signed 32‑bit](#int--signed-32‑bit)  
    1. [Unsigned 32‑bit Integers in Java](#unsigned-32‑bit-integers-in-java)  
    1. [Integer.decode(...)](#integerdecode)  
