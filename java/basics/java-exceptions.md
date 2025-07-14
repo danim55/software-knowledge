@@ -12,7 +12,7 @@ Checked exceptions represent conditions a well‑written application should anti
 - Typically I/O, networking, and database errors  
 - Force explicit handling
 
-**Example:**
+**Example with `throws`:**
 
 ```java
 import java.io.*;
@@ -22,9 +22,23 @@ public void readFile(String path) throws IOException {
         System.out.println(reader.readLine());
     }
 }
-````
+```
 
-Here, `FileNotFoundException` and `IOException` are checked, so the method must declare `throws IOException` or catch it.
+**Example with `try-catch`:**
+
+```java
+import java.io.*;
+
+public void readFileSafely(String path) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+        System.out.println(reader.readLine());
+    } catch (FileNotFoundException e) {
+        System.err.println("File not found: " + path);
+    } catch (IOException e) {
+        System.err.println("I/O error reading file: " + e.getMessage());
+    }
+}
+```
 
 ---
 
@@ -49,5 +63,3 @@ int len = s.length(); // throws NullPointerException
 int[] a = {1, 2, 3};
 int x = a[3];        // throws ArrayIndexOutOfBoundsException
 ```
-
-Unchecked exceptions can be caught if desired, but you are not forced to do so.
