@@ -130,7 +130,6 @@ There are two core reasons:
 
 ## Representing numbers in java
 
----
 
 ### int Signed 32 bit
 
@@ -138,6 +137,7 @@ There are two core reasons:
 - **Storage:** 32 bits (two’s‑complement)  
 - **Range:** –2³¹ to 2³¹–1 (–2,147,483,648 to 2,147,483,647)  
 - **Parsing:**
+
   ```java
   int value = Integer.parseInt("7FFFFFFF", 16); // Max positive
    ```
