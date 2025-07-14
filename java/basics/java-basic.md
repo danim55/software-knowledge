@@ -1,18 +1,18 @@
 ## Table of Contents
 
 1. [Understanding the Difference Between Instance and Class Variables](#understanding-the-difference-between-instance-and-class-variables)  
-   1. [Instance (Per‑object)](#instance-per-object)  
-   1. [Class (Static, Shared)](#class-static-shared)  
-   1. [Revisiting the Original Question](#revisiting-the-original-question)   
-1. [Why `var` Is Not Allowed for Fields](#why-var-is-not-allowed-for-fields)  
-1. [Summary Table](#summary-table)  
+    1. [Instance (Per‑object)](#instance-per-object)  
+    1. [Class (Static, Shared)](#class-static-shared)  
+    1. [Revisiting the Original Question](#revisiting-the-original-question)   
+    1. [Why `var` Is Not Allowed for Fields](#why-var-is-not-allowed-for-fields)  
+    1. [Summary Table](#summary-table)  
 
 1. [Representing numbers in java](#representing-numbers-in-java)
-   1. [int Signed 32 bit](#int-signed-32-bit)  
-   1. [Unsigned 32 bit Integers in Java](#unsigned-32-bit-integers-in-java)  
-   1. [Integer.decode(...)](#integerdecode)  
-   1. [long Signed 64 bit](#long-signed-64-bit)  
-   1. [Quick Tips & Best Practices](#quick-tips--best-practices)  
+    1. [int Signed 32 bit](#int-signed-32-bit)  
+    1. [Unsigned 32 bit Integers in Java](#unsigned-32-bit-integers-in-java)  
+    1. [Integer.decode(...)](#integerdecode)  
+    1. [long Signed 64 bit](#long-signed-64-bit)  
+    1. [Quick Tips & Best Practices](#quick-tips--best-practices)  
 
 ---
 
