@@ -8,10 +8,10 @@
 1. [Summary Table](#summary-table)  
 
 1. [Representing numbers in java](#representing-numbers-in-java)
-   1. [int Signed 32 bit](#int--signed-32‑bit)  
-   1. [Unsigned 32 bit Integers in Java](#unsigned-32‑bit-integers-in-java)  
+   1. [int Signed 32 bit](#int-signed-32-bit)  
+   1. [Unsigned 32 bit Integers in Java](#unsigned-32-bit-integers-in-java)  
    1. [Integer.decode(...)](#integerdecode)  
-   1. [long Signed 64 bit](#long--signed-64‑bit)  
+   1. [long Signed 64 bit](#long-signed-64-bit)  
    1. [Quick Tips & Best Practices](#quick-tips--best-practices)  
 
 ---
@@ -132,7 +132,8 @@ There are two core reasons:
 
 ---
 
-### 1. int  Signed 32 bit
+### int Signed 32 bit
+
 
 - **Storage:** 32 bits (two’s‑complement)  
 - **Range:** –2³¹ to 2³¹–1 (–2,147,483,648 to 2,147,483,647)  
@@ -148,7 +149,7 @@ Throws `NumberFormatException` if:
 
 ---
 
-### 2. Unsigned 32 bit Integers in Java
+### Unsigned 32 bit Integers in Java
 
 Java has no `unsigned int` primitive, but provides utility methods:
 
@@ -173,7 +174,7 @@ Java has no `unsigned int` primitive, but provides utility methods:
 
 ---
 
-### 3. Integer.decode(...)
+### Integer.decode(...)
 
 * Supports multiple bases:
 
@@ -185,7 +186,7 @@ Java has no `unsigned int` primitive, but provides utility methods:
 
 ---
 
-### 4. long  Signed 64 bit
+### long Signed 64 bit
 
 * **Storage:** 64 bits (two’s‑complement)
 * **Range:** –2⁶³ to 2⁶³–1
@@ -202,7 +203,7 @@ Java has no `unsigned int` primitive, but provides utility methods:
 
 ---
 
-### 5. Quick Tips & Best Practices
+### Quick Tips & Best Practices
 
 * Strip prefixes (`0x`, `0X`, leading zeros) before `parseInt()` if not using `decode()`.
 * Use the smallest type that fits your value range.
