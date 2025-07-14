@@ -1,10 +1,7 @@
-````markdown
 ## Table of Contents
 
 - [Checked Exceptions](#checked-exceptions)  
 - [Unchecked Exceptions](#unchecked-exceptions)  
-
----
 
 ## Checked Exceptions
 
@@ -54,6 +51,3 @@ int x = a[3];        // throws ArrayIndexOutOfBoundsException
 ```
 
 Unchecked exceptions can be caught if desired, but you are not forced to do so.
-
-```
-```
