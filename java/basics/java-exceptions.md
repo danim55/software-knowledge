@@ -2,6 +2,10 @@
 
 - [Checked Exceptions](#checked-exceptions)  
 - [Unchecked Exceptions](#unchecked-exceptions)  
+- [Custom Exceptions](#custom-exceptions)
+    - [Custom Checked Exception](#custom-checked-exception)  
+    - [Custom Unchecked Exception](#custom-unchecked-exception)  
+
 
 ## Checked Exceptions
 
@@ -65,12 +69,7 @@ int x = a[3];        // throws ArrayIndexOutOfBoundsException
 ```
 
 
-## How to Create a Custom Exception in Java
-
-### Table of Contents
-- [Why Create Custom Exceptions](#why-create-custom-exceptions)  
-- [Custom Checked Exception](#custom-checked-exception)  
-- [Custom Unchecked Exception](#custom-unchecked-exception)  
+## Custom Exceptions
 
 ---
 
