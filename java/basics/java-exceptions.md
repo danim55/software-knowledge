@@ -71,16 +71,13 @@ int x = a[3];        // throws ArrayIndexOutOfBoundsException
 
 ## Custom Exceptions
 
----
-
-## Why Create Custom Exceptions
+### Why Create Custom Exceptions
 
 Standard Java exception types sometimes don't convey enough detail about domain-specific errors. Custom exceptions allow you to:
 
 - Surface **business logic issues** more clearly  
 - Catch and handle them separately from generic Java errors :contentReference[oaicite:0]{index=0}  
 
----
 
 ## Custom Checked Exception
 
@@ -123,7 +120,6 @@ public String readFirstLine(String fileName) throws IncorrectFileNameException {
 }
 ```
 
----
 
 ## Custom Unchecked Exception
 
@@ -171,10 +167,6 @@ public String readFirstLineWithExtensionCheck(String fileName) {
 ## Summary
 
 Use **checked exceptions** (`extends Exception`) when the caller can *reasonably recover* from the error.
-Use **unchecked exceptions** (`extends RuntimeException`) for programming errors or invalid input the caller can’t fix. ([baeldung.com][1])
+Use **unchecked exceptions** (`extends RuntimeException`) for programming errors or invalid input the caller can't fix.
 
 This pattern helps you maintain precise, well-structured error handling in your Java applications.
-
-```
-::contentReference[oaicite:5]{index=5}
-```
