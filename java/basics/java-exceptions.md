@@ -63,3 +63,119 @@ int len = s.length(); // throws NullPointerException
 int[] a = {1, 2, 3};
 int x = a[3];        // throws ArrayIndexOutOfBoundsException
 ```
+
+
+## How to Create a Custom Exception in Java
+
+### Table of Contents
+- [Why Create Custom Exceptions](#why-create-custom-exceptions)  
+- [Custom Checked Exception](#custom-checked-exception)  
+- [Custom Unchecked Exception](#custom-unchecked-exception)  
+
+---
+
+## Why Create Custom Exceptions
+
+Standard Java exception types sometimes don't convey enough detail about domain-specific errors. Custom exceptions allow you to:
+
+- Surface **business logic issues** more clearly  
+- Catch and handle them separately from generic Java errors :contentReference[oaicite:0]{index=0}  
+
+---
+
+## Custom Checked Exception
+
+Checked exceptions are enforced at compile-time and must be handled or declared.
+
+### 1. Define the exception
+
+```java
+public class IncorrectFileNameException extends Exception {
+    public IncorrectFileNameException(String message) {
+        super(message);
+    }
+
+    public IncorrectFileNameException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+````
+
+### 2. Use it in code
+
+```java
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+public String readFirstLine(String fileName) throws IncorrectFileNameException {
+    try (Scanner file = new Scanner(new File(fileName))) {
+        if (file.hasNextLine()) {
+            return file.nextLine();
+        }
+        return null;
+    } catch (FileNotFoundException e) {
+        if (!isCorrectFileName(fileName)) {
+            throw new IncorrectFileNameException(
+              "Incorrect filename: " + fileName, e);
+        }
+        throw new IncorrectFileNameException("Unable to open file: " + fileName, e);
+    }
+}
+```
+
+---
+
+## Custom Unchecked Exception
+
+Unchecked exceptions extend `RuntimeException`; no need to declare or handle them explicitly.
+
+### 1. Define the exception
+
+```java
+public class IncorrectFileExtensionException extends RuntimeException {
+    public IncorrectFileExtensionException(String message) {
+        super(message);
+    }
+
+    public IncorrectFileExtensionException(String message, Throwable cause) {
+        super(message, cause);
+    }
+}
+```
+
+### 2. Throw it at runtime
+
+```java
+import java.util.Scanner;
+import java.io.FileNotFoundException;
+
+public String readFirstLineWithExtensionCheck(String fileName) {
+    try (Scanner file = new Scanner(new File(fileName))) {
+        if (file.hasNextLine()) {
+            return file.nextLine();
+        }
+        return null;
+    } catch (FileNotFoundException e) {
+        // assume name is correct here
+        if (!fileName.contains(".")) {
+            throw new IncorrectFileExtensionException(
+              "Filename missing extension: " + fileName, e);
+        }
+        throw new RuntimeException("Unexpected error reading file", e);
+    }
+}
+```
+
+---
+
+## Summary
+
+Use **checked exceptions** (`extends Exception`) when the caller can *reasonably recover* from the error.
+Use **unchecked exceptions** (`extends RuntimeException`) for programming errors or invalid input the caller can’t fix. ([baeldung.com][1])
+
+This pattern helps you maintain precise, well-structured error handling in your Java applications.
+
+```
+::contentReference[oaicite:5]{index=5}
+```
