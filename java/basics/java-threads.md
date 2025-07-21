@@ -25,7 +25,7 @@ class Counter {
 }
 ````
 
-If two threads call `increment()` simultaneously, `count++` may run non-atomically, leading to lost updates and incorrect counts ([Baeldung][1]).
+If two threads call `increment()` simultaneously, `count++` may run non-atomically, leading to lost updates and incorrect counts.
 
 
 ## Using `synchronized` on Instance Methods
@@ -46,7 +46,7 @@ public class SafeCounter {
 }
 ```
 
-Now, concurrent calls to `increment()` are queued, and threads never interfere ([Baeldung][1]).
+Now, concurrent calls to `increment()` are queued, and threads never interfere.
 
 
 ## Using `synchronized` on Static Methods
@@ -67,7 +67,7 @@ public class StaticCounter {
 }
 ```
 
-Multiple instances respect the same lock, preventing race conditions on static fields ([Baeldung][1]).
+Multiple instances respect the same lock, preventing race conditions on static fields.
 
 ## Using `synchronized` Blocks
 
