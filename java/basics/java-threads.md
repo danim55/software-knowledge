@@ -1,4 +1,3 @@
-````markdown
 ## Table of Contents
 
 - [Why `synchronized` Matters](#why-synchronized-matters)  
@@ -7,7 +6,6 @@
 - [Using `synchronized` Blocks](#using-synchronized-blocks)  
 - [Reentrant Locks](#reentrant-locks)  
 
----
 
 ## Why `synchronized` Matters
 
@@ -29,7 +27,6 @@ class Counter {
 
 If two threads call `increment()` simultaneously, `count++` may run non-atomically, leading to lost updates and incorrect counts ([Baeldung][1]).
 
----
 
 ## Using `synchronized` on Instance Methods
 
@@ -51,7 +48,6 @@ public class SafeCounter {
 
 Now, concurrent calls to `increment()` are queued, and threads never interfere ([Baeldung][1]).
 
----
 
 ## Using `synchronized` on Static Methods
 
@@ -72,8 +68,6 @@ public class StaticCounter {
 ```
 
 Multiple instances respect the same lock, preventing race conditions on static fields ([Baeldung][1]).
-
----
 
 ## Using `synchronized` Blocks
 
@@ -98,7 +92,7 @@ public class BlockCounter {
 }
 ```
 
-This approach scopes the lock explicitly and avoids locking the entire method ([Baeldung][2]).
+This approach scopes the lock explicitly and avoids locking the entire method.
 
 For static contexts:
 
@@ -107,8 +101,6 @@ synchronized (MyClass.class) {
   // operate on static data
 }
 ```
-
----
 
 ## Reentrant Locks
 
@@ -123,9 +115,8 @@ synchronized (lock) {
 }
 ```
 
-This is safe and supported by the JVM’s monitor mechanism ([Baeldung][1]).
+This is safe and supported by the JVM's monitor mechanism.
 
----
 
 ## Summary
 
