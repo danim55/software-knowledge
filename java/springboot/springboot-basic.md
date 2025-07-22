@@ -1,11 +1,8 @@
 ### Table of Contents
 
-1. [Understanding Component Annotation](#component-in-spring-boot)
-    1. [Key Concepts](#key-concepts)
-        1. [Common Related Annotations](#common-related-annotations)
-        1. [Example](#example)
+1. [Component in Spring Boot](#component-in-spring-boot)
 
-# `@Component` in Spring Boot
+## `@Component` in Spring Boot
 
 In Spring Boot, the `@Component` annotation is used to define a **Spring-managed bean**. When a class is annotated with `@Component`, it becomes a **candidate for component scanning**, allowing Spring to automatically detect and register it in the **application context** at startup.
 
@@ -18,7 +15,7 @@ By default, all components in Spring are **singleton-scoped**, meaning only **on
 * **Singleton (default):** Only one shared instance of the bean exists within the Spring context.
 * **Component Scanning:** Spring automatically finds and registers components based on package structure.
 
-#### Common Related Annotations
+### Common Related Annotations
 
 * `@Component`: Generic stereotype for a Spring-managed component.
 * `@Service`: Specialization of `@Component` used in the service layer.
