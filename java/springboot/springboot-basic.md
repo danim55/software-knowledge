@@ -1,3 +1,93 @@
+## Table of Contents
+
+- [Overview](#overview)  
+- [Core Stereotype Annotations](#core-stereotype-annotations)  
+  - [@Component](#component)  
+  - [@Repository](#repository)  
+  - [@Service](#service)  
+  - [@Controller](#controller)  
+- [@Configuration & @Bean](#configuration--bean)  
+
+## Overview
+
+Spring allows for automatic bean detection using class-level stereotype annotations in the `org.springframework.stereotype` package :contentReference[oaicite:0]{index=0}. These annotations simplify wiring and promote clean, layered application structure.
+
+---
+
+## Core Stereotype Annotations
+
+### @Component
+
+Marks any class to be auto-detected and registered as a bean during component scanning :contentReference[oaicite:1]{index=1}.
+
+```java
+@Component
+public class CarUtility { … }
+```
+
+### @Repository
+
+Specialized for data access objects (DAOs). Adds persistence exception translation automatically ([Baeldung][1]).
+
+```java
+@Repository
+public class VehicleRepository { … }
+```
+
+### @Service
+
+Designates a service-layer component, encapsulating business logic ([Baeldung][1]).
+
+```java
+@Service
+public class VehicleService { … }
+```
+
+### @Controller
+
+Defines a Spring MVC web controller to handle HTTP requests ([Baeldung][1]).
+
+```java
+@Controller
+public class VehicleController { … }
+```
+
+---
+
+## @Configuration & @Bean
+
+Use `@Configuration` classes to define beans via factory methods labeled with `@Bean`.
+
+```java
+@Configuration
+public class AppConfig {
+  @Bean
+  public Engine engine() {
+    return new Engine();
+  }
+}
+```
+
+This creates a Spring-managed `Engine` bean named "engine" ([Baeldung][2]).
+
+---
+
+## Summary
+
+These annotation types enable modular design and clean dependency injection:
+
+* **@Component** – generic bean
+* **@Repository** – database layer
+* **@Service** – business logic
+* **@Controller** – web endpoints
+* **@Configuration/@Bean** – manual bean definitions
+
+Use them to structure your application clearly, leveraging Spring’s powerful auto-detection and DI functionality.
+
+[1]: https://www.baeldung.com/spring-bean-annotations?utm_source=chatgpt.com "Spring Bean Annotations"
+[2]: https://www.baeldung.com/spring-core-annotations?utm_source=chatgpt.com "Spring Core Annotations"
+
+
 ### Table of Contents
 
 1. [Component in Spring Boot](#component-in-spring-boot)
