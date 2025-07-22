@@ -10,14 +10,14 @@
 
 ## Overview
 
-Spring allows for automatic bean detection using class-level stereotype annotations in the `org.springframework.stereotype` package :contentReference[oaicite:0]{index=0}. These annotations simplify wiring and promote clean, layered application structure.
+Spring allows for automatic bean detection using class-level stereotype annotations in the `org.springframework.stereotype` package. These annotations simplify wiring and promote clean, layered application structure.
 
 
 ## Core Stereotype Annotations
 
 ### @Component
 
-Marks any class to be auto-detected and registered as a bean during component scanning :contentReference[oaicite:1]{index=1}.
+Marks any class to be auto-detected and registered as a bean during component scanning.
 
 ```java
 @Component
@@ -26,7 +26,7 @@ public class CarUtility { … }
 
 ### @Repository
 
-Specialized for data access objects (DAOs). Adds persistence exception translation automatically ([Baeldung][1]).
+Specialized for data access objects (DAOs). Adds persistence exception translation automatically.
 
 ```java
 @Repository
@@ -35,7 +35,7 @@ public class VehicleRepository { … }
 
 ### @Service
 
-Designates a service-layer component, encapsulating business logic ([Baeldung][1]).
+Designates a service-layer component, encapsulating business logic.
 
 ```java
 @Service
@@ -44,7 +44,7 @@ public class VehicleService { … }
 
 ### @Controller
 
-Defines a Spring MVC web controller to handle HTTP requests ([Baeldung][1]).
+Defines a Spring MVC web controller to handle HTTP requests.
 
 ```java
 @Controller
@@ -65,22 +65,22 @@ public class AppConfig {
 }
 ```
 
-This creates a Spring-managed `Engine` bean named "engine" ([Baeldung][2]).
+This creates a Spring-managed `Engine` bean named "engine".
 
 ## Summary
 
 These annotation types enable modular design and clean dependency injection:
 
-* **@Component** – generic bean
-* **@Repository** – database layer
-* **@Service** – business logic
-* **@Controller** – web endpoints
-* **@Configuration/@Bean** – manual bean definitions
+* **@Component** - generic bean
+* **@Repository** - database layer
+* **@Service** - business logic
+* **@Controller** - web endpoints
+* **@Configuration/@Bean** - manual bean definitions
 
-Use them to structure your application clearly, leveraging Spring’s powerful auto-detection and DI functionality.
+Use them to structure your application clearly, leveraging Spring's powerful auto-detection and DI functionality.
 
-[1]: https://www.baeldung.com/spring-bean-annotations?utm_source=chatgpt.com "Spring Bean Annotations"
-[2]: https://www.baeldung.com/spring-core-annotations?utm_source=chatgpt.com "Spring Core Annotations"
+[1]: https://w"
+[2]: https://w"
 
 
 ### Table of Contents
