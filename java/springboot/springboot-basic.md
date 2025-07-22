@@ -7,7 +7,7 @@
   - [@Service](#service)  
   - [@Controller](#controller)  
 - [@Configuration & @Bean](#configuration--bean)  
-- [@Component detailed overview](#component-detailed-overview)
+- [@Component detailed explanation](#component-detailed-explanation)
 
 ## Overview
 
@@ -81,7 +81,7 @@ These annotation types enable modular design and clean dependency injection:
 Use them to structure your application clearly, leveraging Spring's powerful auto-detection and DI functionality.
 
 
-## `@Component` detailed overview
+## `@Component` detailed explanation
 
 In Spring Boot, the `@Component` annotation is used to define a **Spring-managed bean**. When a class is annotated with `@Component`, it becomes a **candidate for component scanning**, allowing Spring to automatically detect and register it in the **application context** at startup.
 
