@@ -12,7 +12,6 @@
 
 Spring allows for automatic bean detection using class-level stereotype annotations in the `org.springframework.stereotype` package :contentReference[oaicite:0]{index=0}. These annotations simplify wiring and promote clean, layered application structure.
 
----
 
 ## Core Stereotype Annotations
 
@@ -52,8 +51,6 @@ Defines a Spring MVC web controller to handle HTTP requests ([Baeldung][1]).
 public class VehicleController { … }
 ```
 
----
-
 ## @Configuration & @Bean
 
 Use `@Configuration` classes to define beans via factory methods labeled with `@Bean`.
@@ -69,8 +66,6 @@ public class AppConfig {
 ```
 
 This creates a Spring-managed `Engine` bean named "engine" ([Baeldung][2]).
-
----
 
 ## Summary
 
