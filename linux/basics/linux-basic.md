@@ -5,10 +5,7 @@
    1. [Mounting - attaching a filesystem](#mounting--attaching-a-filesystem)  
    1. [NFS - Network File System](#nfs--network-file-system)  
    1. [Example of use](#example-of-use)  
-      1. [Why this matters](#why-this-matters)  
-      1. [Essence](#essence)  
 
----
 
 # Configuring NFS
 
@@ -27,7 +24,6 @@ A plain-text file that tells Linux which filesystems to mount at boot (or on dem
 ### Why it matters  
 When you run `mount -a` or on each boot, Linux reads `/etc/fstab` and automatically mounts everything it finds there.
 
----
 
 ## Mounting - attaching a filesystem
 
@@ -41,7 +37,6 @@ A regular directory (empty, or already a mount point) where the filesystem's con
 mkdir -p /path/to/mountpoint
 ```
 
----
 
 ## NFS - Network File System
 
@@ -55,7 +50,6 @@ A protocol (and set of kernel drivers) that lets one machine share directories o
 1. **TCP/UDP on port 2049:** File operations—`read`, `write`, `lookup`—happen over TCP or UDP (here forced via `proto=tcp,port=2049`).
 1. **Kernel module:** The Linux NFS client module translates local `open()`, `read()`, `write()` calls into network requests.
 
----
 
 ## Example of use
 
@@ -79,7 +73,6 @@ mount -a
 
 After this, `/mnt/nfs_logs` behaves like a local folder—its contents are served live from the NFS server.
 
----
 
    ### Why this matters
 
@@ -87,7 +80,6 @@ After this, `/mnt/nfs_logs` behaves like a local folder—its contents are serve
    * **Performance & reliability:** Matching `defaults,proto=tcp,port=2049` ensures consistent transport.
    * **Seamless tooling:** Standard Linux commands (`ls`, `cp`, `tar`, etc.) work transparently on remote files.
 
-   ---
 
    ### Essence
 
