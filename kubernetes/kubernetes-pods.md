@@ -1,17 +1,14 @@
 ## Table of Contents
 
 1. [What Is a Pod?](#what-is-a-pod)  
-2. [Pod Context & Isolation](#pod-context--isolation)  
-3. [Pod Components](#pod-components)  
-4. [Pod Use Cases](#pod-use-cases)  
-5. [Pod Manifest Example](#pod-manifest-example)  
-6. [Workload Resources & Controllers](#workload-resources--controllers)  
-7. [Pod Lifecycle & Updates](#pod-lifecycle--updates)  
-8. [Pod Subresources](#pod-subresources)  
-9. [Resource Sharing & Communication](#resource-sharing--communication)  
-10. [Pod Security Settings](#pod-security-settings)  
-11. [Static Pods](#static-pods)  
-12. [Container Probes](#container-probes)  
+1. [Pod Manifest Example](#pod-manifest-example)  
+1. [Workload Resources & Controllers](#workload-resources--controllers)  
+1. [Pod Lifecycle & Updates](#pod-lifecycle--updates)  
+1. [Pod Subresources](#pod-subresources)  
+1. [Resource Sharing & Communication](#resource-sharing--communication)  
+1. [Pod Security Settings](#pod-security-settings)  
+1. [Static Pods](#static-pods)  
+1. [Container Probes](#container-probes)  
 
 # Pods
 
@@ -25,21 +22,6 @@ As well as application containers, a Pod can contain init containers that run du
 
 > **Note:** You need a container runtime on each node (e.g., containerd) for Pods to run there.
 
-The shared context of a Pod is a set of Linux namespaces, cgroups, and potentially other facets of isolation - the same things that isolate a container. Within a Pod's context, the individual applications may have further sub-isolations applied.
-
-A Pod is similar to a set of containers with shared namespaces and shared filesystem volumes.
-
-Pods in a Kubernetes cluster are used in two main ways:
-
-- **Pods that run a single container.** The "one-container-per-Pod" model is the most common Kubernetes use case; in this case, you can think of a Pod as a wrapper around a single container; Kubernetes manages Pods rather than managing the containers directly.
-
-- **Pods that run multiple containers that need to work together.** A Pod can encapsulate an application composed of multiple co-located containers that are tightly coupled and need to share resources. These co-located containers form a single cohesive unit.
-
-    Grouping multiple co-located and co-managed containers in a single Pod is a relatively advanced use case. You should use this pattern only in specific instances in which your containers are tightly coupled.
-
-
-## Pod Context & Isolation
-
 Within a Pod, containers share:
 
 - **Linux namespaces** (PID, network, IPC)  
@@ -48,26 +30,19 @@ Within a Pod, containers share:
 
 This context is analogous to a light VM; containers may have further sub‑isolations if needed.
 
-
-## Pod Components
+A Pod is similar to a set of containers with shared namespaces and shared filesystem volumes.
 
 - **Application containers:** The main workloads.  
 - **Init containers:** Run sequentially before app containers on startup.  
 - **Ephemeral containers:** Injected at runtime for debugging.
 
+Pods in a Kubernetes cluster are used in two main ways:
 
-## Pod Use Cases
+- **Pods that run a single container.** The "one-container-per-Pod" model is the most common Kubernetes use case; in this case, you can think of a Pod as a wrapper around a single container; Kubernetes manages Pods rather than managing the containers directly.
 
-1. **Single‑container Pods**  
-   - Most common pattern: Pod wraps one container.  
-   - Scaling is done by creating multiple Pods via a controller.
+- **Pods that run multiple containers that need to work together.** A Pod can encapsulate an application composed of multiple co-located containers that are tightly coupled and need to share resources. These co-located containers form a single cohesive unit.
 
-2. **Multi‑container Pods**  
-   - Sidecar, ambassador, adapter patterns.  
-   - Containers share network/IP (`localhost`) and volumes.  
-   - Use only when containers are tightly coupled.
-
-> You don't use multiple containers for replication—use workload controllers instead.
+    Grouping multiple co-located and co-managed containers in a single Pod is a relatively advanced use case. You should use this pattern only in specific instances in which your containers are tightly coupled.
 
 
 ## Pod Manifest Example
