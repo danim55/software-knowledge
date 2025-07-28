@@ -123,10 +123,21 @@ On Nodes, the kubelet does not directly observe or manage any of the details aro
 
 ## Pod Lifecycle & Updates
 
-* Pods are **ephemeral**: they run until completion, deletion, eviction, or node failure.
-* A Pod's **name** must be a valid DNS subdomain; hostnames follow DNS label rules.
-* Most fields are **immutable** (e.g., name, namespace).
-* To update spec fields, controllers create **replacement Pods** rather than patching existing ones.
+As mentioned in the previous section, when the Pod template for a workload resource is changed, the controller creates new Pods based on the updated template instead of updating or patching the existing Pods.
+
+Kubernetes doesn't prevent you from managing Pods directly. It is possible to update some fields of a running Pod, in place. However, Pod update operations like patch, and replace have some limitations:
+
+- Most of the metadata about a Pod is immutable. For example, you cannot change the namespace, name, uid, or creationTimestamp fields.
+    - The generation field is unique. It will be automatically set by the system such that new pods have a generation of 1, and every update to mutable fields in the pod's spec will increment the generation by 1. 
+
+- If the metadata.deletionTimestamp is set, no new entry can be added to the metadata.finalizers list.
+
+- Pod updates may not change fields other than `spec.containers[*].image`, `spec.initContainers[*].image`, `spec.activeDeadlineSeconds` or `spec.tolerations`. For `spec.tolerations`, you can only add new entries.
+
+- When updating the `spec.activeDeadlineSeconds` field, two types of updates are allowed:
+
+    1. setting the unassigned field to a positive number;
+    1. updating the field from a positive number to a smaller, non-negative number.
 
 
 ## Pod Subresources
