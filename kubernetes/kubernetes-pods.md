@@ -69,14 +69,19 @@ kubectl apply -f https://k8s.io/examples/pods/simple-pod.yaml
 
 ## Workload Resources & Controllers
 
-Rather than creating Pods directly, use controllers to manage them:
+Usually you don't need to create Pods directly, even singleton Pods. Instead, create them using workload resources such as Deployment or Job. If your Pods need to track state, consider the StatefulSet resource.
 
-* **Deployment**
-* **StatefulSet**
-* **DaemonSet**
-* **Job / CronJob**
+Each Pod is meant to run a single instance of a given application. If you want to scale your application horizontally (to provide more overall resources by running more instances), you should use multiple Pods, one for each instance. In Kubernetes, this is typically referred to as replication. Replicated Pods are usually created and managed as a group by a workload resource and its controller.
 
 Controllers handle replication, updates, and self‑healing (e.g., recreating Pods on node failure).
+
+You'll rarely create individual Pods directly in Kubernetes—even singleton Pods. This is because Pods are designed as relatively ephemeral, disposable entities. When a Pod gets created (directly by you, or indirectly by a controller), the new Pod is scheduled to run on a Node in your cluster. The Pod remains on that node until the Pod finishes execution, the Pod object is deleted, the Pod is evicted for lack of resources, or the node fails.
+
+> **Note:**
+Restarting a container in a Pod should not be confused with restarting a Pod. A Pod is not a process, but an environment for running container(s). A Pod persists until it is deleted.
+
+The name of a Pod must be a valid DNS subdomain value, but this can produce unexpected results for the Pod hostname. For best compatibility, the name should follow the more restrictive rules for a DNS label.
+
 
 
 ## Pod Lifecycle & Updates
