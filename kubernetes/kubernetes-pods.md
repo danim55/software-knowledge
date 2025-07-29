@@ -142,12 +142,13 @@ Kubernetes doesn't prevent you from managing Pods directly. It is possible to up
 
 ## Pod Subresources
 
-Special update paths:
+The above update rules apply to regular pod updates, but other pod fields can be updated through subresources.
 
-* **Resize:** update `spec.containers[*].resources`
-* **EphemeralContainers:** add debugging containers
-* **Status:** update Pod status (used by kubelet)
-* **Binding:** set `spec.nodeName` via binding API
+-**Resize:** The resize subresource allows container resources (spec.containers[*].resources) to be updated. See Resize Container Resources for more details.
+-**Ephemeral** Containers: The ephemeralContainers subresource allows ephemeral containers to be added to a Pod. See Ephemeral Containers for more details.
+-**Status:** The status subresource allows the pod status to be updated. This is typically only used by the Kubelet and other system controllers.
+-**Binding:** The binding subresource allows setting the pod's spec.nodeName via a Binding request. This is typically only used by the scheduler.
+
 
 
 ## Resource Sharing & Communication
