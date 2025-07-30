@@ -149,8 +149,6 @@ The above update rules apply to regular pod updates, but other pod fields can be
 - **Status:** The status subresource allows the pod status to be updated. This is typically only used by the Kubelet and other system controllers.
 - **Binding:** The binding subresource allows setting the pod's spec.nodeName via a Binding request. This is typically only used by the scheduler.
 
-
-
 ## Resource Sharing & Communication
 
 Pods enable data sharing and communication among their constituent containers.
