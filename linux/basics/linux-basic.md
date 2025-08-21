@@ -1,17 +1,18 @@
 ## Table of Contents
 
-1. [Configuring Nfs](#configuring-nfs)
+1. [Configuring nfs](#configuring-nfs)
    1. [ `/etc/fstab` - the filesystem table](#etcfstab--the-filesystem-table)  
    1. [Mounting - attaching a filesystem](#mounting--attaching-a-filesystem)  
-   1. [NFS - Network File System](#nfs--network-file-system)  
+   1. [nfs - Network File System](#nfs--network-file-system)  
    1. [Example of use](#example-of-use)  
+1. [Configuring tls for nfs](#configuring-tls-for-nfs)
 1. [Configure log rotate](#configuring-log-rotate)
    1. [Example Configuration](#example-configuration)
    1. [Directive Breakdown](#directive-breakdown)
    1. [Testing and Troubleshooting](#testing-and-troubleshooting)
 
 
-# Configuring NFS
+# Configuring nfs
 
 ## `/etc/fstab` - the filesystem table
 
@@ -32,7 +33,7 @@ When you run `mount -a` or on each boot, Linux reads `/etc/fstab` and automatica
 ## Mounting - attaching a filesystem
 
 ### What it means  
-The `mount` command tells the kernel to attach a filesystem (local disk, CD, NFS export, etc.) and make it available under a directory in the existing directory tree.
+The `mount` command tells the kernel to attach a filesystem (local disk, CD, nfs export, etc.) and make it available under a directory in the existing directory tree.
 
 ### The mount point  
 A regular directory (empty, or already a mount point) where the filesystem's contents appear. Create it with:
@@ -42,9 +43,9 @@ mkdir -p /path/to/mountpoint
 ```
 
 
-## NFS - Network File System
+## nfs - Network File System
 
-### What NFS is
+### What nfs is
 
 A protocol (and set of kernel drivers) that lets one machine share directories over the network and lets clients mount them as if they were local disks.
 
@@ -52,7 +53,7 @@ A protocol (and set of kernel drivers) that lets one machine share directories o
 
 1. **RPC (Remote Procedure Call):** Uses `rpcbind` to negotiate service ports.
 1. **TCP/UDP on port 2049:** File operations—`read`, `write`, `lookup`—happen over TCP or UDP (here forced via `proto=tcp,port=2049`).
-1. **Kernel module:** The Linux NFS client module translates local `open()`, `read()`, `write()` calls into network requests.
+1. **Kernel module:** The Linux nfs client module translates local `open()`, `read()`, `write()` calls into network requests.
 
 
 ## Example of use
@@ -75,7 +76,7 @@ mkdir -p /mnt/nfs_logs
 mount -a
 ```
 
-After this, `/mnt/nfs_logs` behaves like a local folder—its contents are served live from the NFS server.
+After this, `/mnt/nfs_logs` behaves like a local folder—its contents are served live from the nfs server.
 
 
    ### Why this matters
@@ -89,7 +90,7 @@ After this, `/mnt/nfs_logs` behaves like a local folder—its contents are serve
 
    * **`fstab`** declares what to mount where.
    * **`mount`** performs the action.
-   * **NFS** provides a networked filesystem interface for remote directories.
+   * **nfs** provides a networked filesystem interface for remote directories.
 
 ## Configuring log rotate
 
@@ -100,7 +101,7 @@ After this, `/mnt/nfs_logs` behaves like a local folder—its contents are serve
 1. [Overview](#overview)  
 2. [Example Configuration](#example-configuration)  
 3. [Directive Breakdown](#directive-breakdown)  
-4. [NFS-Specific Considerations](#nfs-specific-considerations)  
+4. [nfs-Specific Considerations](#nfs-specific-considerations)  
 5. [Testing and Troubleshooting](#testing-and-troubleshooting)  
 
 
@@ -161,16 +162,16 @@ This creates `/etc/logrotate.d/some-app` with rules for all `.log` files under `
   Ideal when the application cannot be signaled to close and reopen its log descriptor.
 
 
-### NFS-Specific Considerations
+### nfs-Specific Considerations
 
 * **Shared Storage Consistency**
-  On NFS volumes, `copytruncate` avoids issues with file‐handle reopening across the network.
+  On nfs volumes, `copytruncate` avoids issues with file‐handle reopening across the network.
 
 * **Locking and Concurrency**
   Ensure only one node runs `logrotate` for shared logs (e.g., via a cron job on a single "log‐owner" host) to prevent conflicting rotations.
 
 * **Permission Alignment**
-  The user running `logrotate` must have write permission on the NFS share and ownership or group access to the log files.
+  The user running `logrotate` must have write permission on the nfs share and ownership or group access to the log files.
 
 
 ### Testing and Troubleshooting
