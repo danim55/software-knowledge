@@ -297,14 +297,6 @@ Current configuration
 
 ## Configuring logrotate for `some-app` Logs
 
-### Table of Contents
-
-1. [Overview](#overview)  
-2. [Example Configuration](#example-configuration)  
-3. [Directive Breakdown](#directive-breakdown)  
-4. [nfs-Specific Considerations](#nfs-specific-considerations)  
-5. [Testing and Troubleshooting](#testing-and-troubleshooting)  
-
 
 ## Overview
 
