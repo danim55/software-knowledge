@@ -8,6 +8,7 @@
 1. [Configuring tls for nfs](#configuring-tls-for-nfs)
   1. [Common configuration](#common-configuration)
   1. [Server](#server)
+  1. [Client](#client)
 1. [Configure log rotate](#configuring-log-rotate)
    1. [Example Configuration](#example-configuration)
    1. [Directive Breakdown](#directive-breakdown)
@@ -113,8 +114,6 @@ After this, `/mnt/nfs_logs` behaves like a local folder—its contents are serve
     ssh merinod@10.10.10.10
 ```
 
-### Generate private key, request and certificate
-
 1. Create temporary configuration file
 
 ```bash
@@ -130,7 +129,7 @@ req_extensions     = v3_req
 prompt = no
 
 [ req_distinguished_name ]
-CN = 10.11.12.30 # IP of the nfs server
+CN = 10.10.10.10 # IP of the nfs server
 
 [ v3_req ]
 keyUsage = digitalSignature, keyEncipherment
@@ -138,7 +137,7 @@ extendedKeyUsage = serverAuth, clientAuth
 subjectAltName = @alt_names
 
 [ alt_names ]
-IP.1 = 10.11.12.30 # IP of the nfs server
+IP.1 = 10.10.10.10 # IP of the nfs server
 ```
 
 1. Previous steps
@@ -216,6 +215,83 @@ Current configuration
     systemctl enable tlshd.service
 ```
 
+## Client
+
+1. Connect to the remote machine
+
+```bash
+    ssh merinod@10.10.10.11
+```
+
+1. Previous steps
+
+```bash
+    sudo -i
+    umask 077
+    cd /etc/pki/tls/certs
+```
+
+1. Generate key and assign correct permissions
+
+```bash
+    openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:4096 -out /etc/pki/tls/private/nfs-client.key
+    chown root:root /etc/pki/tls/private/nfs-client.key
+    chmod 600 /etc/pki/tls/private/nfs-client.key
+```
+
+1. Generate request and certificate
+```bash
+    # Create CSR
+    openssl req -new -sha256 -key nfs-client.key -out nfs-client-certificate-request.csr
+    # Create self-signed certificate
+    openssl req -key nfs-client.key -x509 -new -days 365 -out nfs-client-certificate.crt
+
+    sudo chmod 644 /etc/pki/tls/certs/nfs-client-certificate.crt
+```
+
+1. Edit `/etc/tlshd.conf` to use these files, using your own values for x509.certificate and x509.private_key:
+
+```bash
+    sudo vi /etc/tlshd.conf
+```
+The content must be:
+
+```
+[main]
+loglevel=3
+tls=1
+
+[authenticate.client]
+x509.certificate= /etc/pki/tls/certs/nfs-client-certificate.crt
+x509.private_key= /etc/pki/tls/private/nfs-client.key
+```
+
+1. Copy the certificate of the server
+
+1. Add certificate to trust store 
+
+```bash
+    sudo trust anchor certificate.crt
+```
+
+1. Modify `/etc/fstab` to use the xprtsec=mtls
+
+Previous configuration
+```
+    10.10.10.10:/home/project/nfsshare/subproject/log /mnt/nfs_logs nfs defaults,proto=tcp,port=2049 0 0
+```
+
+Current configuration
+```
+    10.10.10.10:/home/project/nfsshare/subproject/log /mnt/nfs_logs nfs defaults,proto=tcp,port=2049,vers=4.2,xprtsec=mtls 0 0
+```
+
+1. Start and enable tlshd.service
+
+```bash
+    sudo systemctl start tlshd.service
+    sudo systemctl enable tlshd.service
+```
 
 ## Configuring log rotate
 
