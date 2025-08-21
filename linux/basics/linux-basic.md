@@ -6,6 +6,8 @@
    1. [nfs - Network File System](#nfs--network-file-system)  
    1. [Example of use](#example-of-use)  
 1. [Configuring tls for nfs](#configuring-tls-for-nfs)
+  1. [Common configuration](#common-configuration)
+  1. [Server](#server)
 1. [Configure log rotate](#configuring-log-rotate)
    1. [Example Configuration](#example-configuration)
    1. [Directive Breakdown](#directive-breakdown)
@@ -41,7 +43,6 @@ A regular directory (empty, or already a mount point) where the filesystem's con
 ```bash
 mkdir -p /path/to/mountpoint
 ```
-
 
 ## nfs - Network File System
 
@@ -91,6 +92,130 @@ After this, `/mnt/nfs_logs` behaves like a local folder—its contents are serve
    * **`fstab`** declares what to mount where.
    * **`mount`** performs the action.
    * **nfs** provides a networked filesystem interface for remote directories.
+
+# Configuring tls for nfs
+
+## Common configuration
+
+1. Install the [ktls-utils](https://github.com/oracle/ktls-utils) both in server and client
+
+1. Launch command to download the rpm:
+
+```bash
+    sudo dnf install ktls-utils -y
+```
+
+## Server
+
+1. Connect to the remote machine
+
+```bash
+    ssh merinod@10.10.10.10
+```
+
+### Generate private key, request and certificate
+
+1. Create temporary configuration file
+
+```bash
+    sudo vi /tmp/nfs-openssl.cnf
+```
+
+1. Add the following content
+
+```bash
+[ req ]
+distinguished_name = req_distinguished_name
+req_extensions     = v3_req
+prompt = no
+
+[ req_distinguished_name ]
+CN = 10.11.12.30 # IP of the nfs server
+
+[ v3_req ]
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alt_names
+
+[ alt_names ]
+IP.1 = 10.11.12.30 # IP of the nfs server
+```
+
+1. Previous steps
+
+```bash
+    sudo -i
+    umask 077
+    cd /etc/pki/tls/certs
+```
+
+1. Generate key and assign correct permissions
+
+```bash
+    openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:4096 -out /etc/pki/tls/private/nfs-server.key
+    chown root:root /etc/pki/tls/private/nfs-server.key
+    chmod 600 /etc/pki/tls/private/nfs-server.key
+```
+
+1. Generate request and certificate
+```bash
+    # Create CSR
+    openssl req -new -key /etc/pki/tls/private/nfs-server.key -out /tmp/nfs-server.csr -config /tmp/nfs-openssl.cnf
+
+    # Create self signed certificate
+    openssl x509 -req -in /tmp/nfs-server.csr -signkey /etc/pki/tls/private/nfs-server.key -out /etc/pki/tls/certs/nfs-server-certificate.crt -days 365 -extensions v3_req -extfile /tmp/nfs-openssl.cnf
+
+    sudo chmod 644 /etc/pki/tls/certs/nfs-server-certificate.crt
+```
+
+1. Edit `/etc/tlshd.conf` to use these files, using your own values for x509.certificate and x509.private_key:
+
+```bash
+    sudo vi /etc/tlshd.conf
+```
+The content must be:
+
+```bash
+[main]
+tls=1
+loglevel=3
+
+[authenticate.server]
+x509.certificate= /etc/pki/tls/certs/nfs-server-certificate.crt
+x509.private_key= /etc/pki/tls/private/nfs-server.key
+```
+
+1. Copy the certificate of the client
+
+1. Add certificate to trust store 
+
+```bash
+    sudo trust anchor certificate.crt
+```
+
+1. Modify `/etc/exports` to add the `xprtsec=mtls` configuration:
+
+```bash
+    sudo vi /etc/exports
+```
+
+Previous configuration
+```
+    /home/project/nfsshare/sub-project/log 10.11.12.0/24(rw,sync,no_subtree_check)
+```
+
+Current configuration
+```
+    /home/project/nfsshare/sub-project/log 10.11.12.0/24(rw,sync,no_subtree_check,xprtsec=mtls)
+```
+
+1. Start and enable tlshd.service
+
+```bash
+    systemctl start tlshd.service
+    systemctl enable tlshd.service
+```
+
 
 ## Configuring log rotate
 
